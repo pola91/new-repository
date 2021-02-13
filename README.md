@@ -115,3 +115,14 @@ $ curl --header \
         --header "Content-Type: application/json" \
         http://localhost:3189/users
 ```
+
+### Archive User
+##### (PUT /archive/:user_id)
+
+```bash
+$ curl --request PUT --header \
+        "Authentication: Bearer JWT_TOKEN" \
+        --header "Content-Type: application/json" \
+          http://localhost:3189/archive/2 
+
+```
