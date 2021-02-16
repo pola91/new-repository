@@ -18,6 +18,22 @@ RSpec.describe "Signups", type: :request do
       expect(response).to have_http_status(:created)
     end
 
+    fit "create second user for testing" do
+      user_data = {
+        data: {
+          attributes: {
+            email: 'danni2@example.com',
+            password: 'supersecurepassword',
+            password_confirmation: 'supersecurepassword'
+          }
+        }
+      }
+      expect {
+        post '/signup', params: user_data.to_json, headers: { "Content-Type": "application/json" }
+      }.to change(User, :count).by(1)
+      expect(response).to have_http_status(:created)
+    end
+
     fit "returns http error" do
       user_data = {
         data: {

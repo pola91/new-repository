@@ -21,6 +21,7 @@ gem 'jwt'
 
 # seriaization & json_api logic
 gem 'jsonapi.rb'
+gem 'discard', '~> 1.2'
 
 
 group :development, :test do
