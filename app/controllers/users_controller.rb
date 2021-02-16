@@ -5,13 +5,18 @@ class UsersController < ApplicationController
   end
 
   def archive_user
-    @user.update(archiver_id: current_user.id, discarded_at: Time.now)
-    render jsonapi: User.all.kept
+    @user.update(archiver_id: current_user.id, discarded_at: Time.now) unless @user.discarded?
+    render jsonapi: @user
+  end 
+
+  def unarchive_user
+    @user.update(archiver_id: current_user.id, discarded_at: nil) if @user.discarded?
+    render jsonapi: @user
   end 
 
   private
 
   def set_user
-    @user = User.kept.find_by_id(params[:user_id])
+    @user = User.find_by_id(params[:user_id])
   end
 end
